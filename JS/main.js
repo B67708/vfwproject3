@@ -77,8 +77,14 @@ function toggle(x){
 }
 
 // Making save data function
-function submitData(){
-	var id = Math.floor(Math.random()*5551212);
+function submitData(key){
+	if(!key){
+		var id = Math.floor(Math.random()*5551212);
+	}
+	else{
+		id=key
+	}
+	
 	
 // Gathering data in an object. Object has array with form label and input label
 	getRadio();
@@ -141,10 +147,16 @@ function clearData(){
 	
 //These functions validate the fields.	
 	
-function validate(){
+function validate(eval){
 	var getMake = gid("makes"),
 		getModel = gid("models"),
 		getYear = gid("year");
+		
+	errorMessage.innerHTML = "";
+	getMake.style.border = "1px solid black";
+	getModel.style.border = "1px solid black";
+	getYear.style.border = "1px solid black";
+		
 		
 	var errorMessage = [];
 	
@@ -169,13 +181,29 @@ function validate(){
 		errorMessage.push(yearError);
 		
 	} 
+	
+	if(errorMessage.length >= 1){
+		for(var i=0, j=errorMessage.length; i<j; i++){
+			var createLi = document.createElement("li");
+			createli.innerHTML = errorMessage[i];
+			errMess.appendChild(createLi)
+		}
+		eval.preventDefault();
+		return false;
+	}
+	else{
+		submitData(this.key);
+	}
+	
+	
 		
 } 
 	
 // Variable Defaults
 var makeList = ["--Choose a make--", "Chevrolet", "Ford", "Buick", "Dodge", "Jeep"],
 	modelList = ["--Choose a model--", "Cruze", "Impala", "Cobalt", "Camaro", "Focus", "Explorer", "Fusion", "F-150", "Regal", "Lacrosse", "Enclave", "Century", "Viper", "Ram", "Dart", "Durango", "Wrangler", "Liberty", "Patriot", "Compass"],
-	newUsedValue;
+	newUsedValue,
+	errMess = gid("error");
 dropDown1();
 dropDown2();
 
@@ -189,7 +217,7 @@ var clear = gid("clear");
 clear.addEventListener("click", clearData);
 
 var submit = gid("submit");
-submit.addEventListener("click", submitData);
+submit.addEventListener("click", validate);
 
 
 	
