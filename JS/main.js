@@ -139,6 +139,39 @@ function clearData(){
 	window.location.reload();
 } 
 	
+//These functions validate the fields.	
+	
+function validate(){
+	var getMake = gid("makes"),
+		getModel = gid("models"),
+		getYear = gid("year");
+		
+	var errorMessage = [];
+	
+	
+	if(getMake.value === "--Choose a make--"){
+		var makeError = "Please choose a make!";
+		getMake.style.border = "1px solid red";
+		errorMessage.push(makeError);
+		
+	} 
+	
+	if(getModel.value === "--Choose a model--"){
+		var modelError = "Please choose a model!";
+		getModel.style.border = "1px solid red";
+		errorMessage.push(modelError);
+		
+	} 
+	
+	if(getYear.value === ""){
+		var yearError = "Please choose a year!";
+		getYear.style.border = "1px solid red";
+		errorMessage.push(yearError);
+		
+	} 
+		
+} 
+	
 // Variable Defaults
 var makeList = ["--Choose a make--", "Chevrolet", "Ford", "Buick", "Dodge", "Jeep"],
 	modelList = ["--Choose a model--", "Cruze", "Impala", "Cobalt", "Camaro", "Focus", "Explorer", "Fusion", "F-150", "Regal", "Lacrosse", "Enclave", "Century", "Viper", "Ram", "Dart", "Durango", "Wrangler", "Liberty", "Patriot", "Compass"],
