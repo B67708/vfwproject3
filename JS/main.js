@@ -158,6 +158,37 @@ function editDelete(){
 	liLink.appendChild(del);
 	 
 }
+// Making edit link function
+function editItem(){
+	var value = localStorage.getItem(this.key);
+	var object = JSON.parse(value);
+	toggle("off");
+	gid("newUsed").value = item.newUsed[1];
+	var newUsedRadio = document.form[0].newUsed;
+	
+	for(var i=0;i < newUsedRadio.length; i++){
+		if(newUsedRadio[i].value === "New" && item.newUsed[1] === "New"){
+			newUsedRadio[i].setAttribute("checked", "checked");
+		}
+		else if(newUsedRadio[i].value === "Used" && item.newUsed[1] === "Used")		{
+			newUsedRadio[i].setAttribute("checked", "checked"); 
+		}
+	}
+	gid("make").value = item.make[1];
+	gid("model").value = item.model[1];
+	gid("year").value = item.year[1];
+	gid("mileage").value = item.mileage[1];
+	gid("condition").value = item.condition[1];
+	gid("date").value = item.date[1];
+	gid("notes").value = item.notes[1];
+	
+	submit.removeEventListener("click", submitData);
+	gid("submit").value = "Edit this vehicle";
+	var editSubmit = gid("submit");
+	editSubmit.addEventListener("click", validate);
+	editSubmit.key = this.key	
+	}
+	
 
 //This function clears local storage data
 function clearData(){
