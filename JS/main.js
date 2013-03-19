@@ -82,7 +82,7 @@ function submitData(key){
 		var id = Math.floor(Math.random()*5551212);
 	}
 	else{
-		id=key
+		id=key;
 	}
 	
 	
@@ -118,8 +118,9 @@ function getData(){
 	gid("item").style.display = "block";
 	for(var i=0, j=localStorage.length; i<j; i++){
 		var createLi = document.createElement("li");
+		var liLink = document.createElement("li");
 		createUl.appendChild(createLi);
-		var key = localStorage.key(i)
+		var key = localStorage.key(i);
 		var value = localStorage.getItem(key);
 		
 // Converts string to object with JSON parse		
@@ -131,11 +132,31 @@ function getData(){
 		createLi.appendChild(createSubLi);
 		var SubText = object[y] [0] +" "+ object[y] [1];
 		createSubLi.innerHTML = SubText;
+		subList.appendChild(liLink);
 			
-		}			
+		}	
+			editDelete(localStorage.key(i),liLink);		
 	}
 	
 	
+}
+function editDelete(){
+	var edit = document.createElement("a");
+	edit.href = "#";
+	edit.key = key;
+	var tEdit ="Edit Vehicle";
+	edit.addEventListener("click", editItem);
+	edit.innerHTML = tEdit;
+	liLink.appendChild(edit);
+	
+	var del = document.createElement("a");
+	del.href = "#";
+	del.key = key;
+	var tDel ="Delete Vehicle";
+	del.addEventListener("click", deleteItem);
+	del.innerHTML = tdelete;
+	liLink.appendChild(del);
+	 
 }
 
 //This function clears local storage data
@@ -152,7 +173,7 @@ function validate(eval){
 		getModel = gid("models"),
 		getYear = gid("year");
 		
-	errorMessage.innerHTML = "";
+	errMess.innerHTML = "";
 	getMake.style.border = "1px solid black";
 	getModel.style.border = "1px solid black";
 	getYear.style.border = "1px solid black";
