@@ -1,6 +1,6 @@
 // John Cardiff-Winchell
 // VFW 1303
-// Project week 2
+// Project 3
 
 // Wait until DOM is loaded
 window.addEventListener("DOMContentLoaded",function(){
@@ -100,8 +100,8 @@ function submitData(key){
 		
 // Use stringify to convert object to string and save data to local storage
 	localStorage.setItem(id, JSON.stringify(item));
-	alert("Vehicle added!")
-		
+	alert("Vehicle added!");
+	window.location.reload();	
 }
 
 // This function displays data to the browser
@@ -109,6 +109,7 @@ function getData(){
 	toggle("on");
 	if(localStorage.length === 0){
 		alert("Local storage is empty.");
+		
 	}
 	var createDiv = document.createElement("div");
 	createDiv.setAttribute("id", "item");
@@ -140,7 +141,7 @@ function getData(){
 	
 	
 }
-function editDelete(){
+function editDelete(key, liLink){
 	var edit = document.createElement("a");
 	edit.href = "#";
 	edit.key = key;
@@ -154,28 +155,27 @@ function editDelete(){
 	del.key = key;
 	var tDel ="Delete Vehicle";
 	del.addEventListener("click", deleteItem);
-	del.innerHTML = tdelete;
+	del.innerHTML = tDel;
 	liLink.appendChild(del);
 	 
 }
 // Making edit link function
 function editItem(){
 	var value = localStorage.getItem(this.key);
-	var object = JSON.parse(value);
+	var item = JSON.parse(value);
 	toggle("off");
-	gid("newUsed").value = item.newUsed[1];
-	var newUsedRadio = document.form[0].newUsed;
 	
-	for(var i=0;i < newUsedRadio.length; i++){
-		if(newUsedRadio[i].value === "New" && item.newUsed[1] === "New"){
-			newUsedRadio[i].setAttribute("checked", "checked");
+	var rad = document.forms[0].newUsed;
+	
+	for(var i=0;i < rad.length; i++){
+		if(rad[i].value === "New" && item.newUsed[1] === "New"){
+			rad[i].setAttribute("checked", "checked");
 		}
-		else if(newUsedRadio[i].value === "Used" && item.newUsed[1] === "Used")		{
-			newUsedRadio[i].setAttribute("checked", "checked"); 
+		else if(rad[i].value === "Used" && item.newUsed[1] === "Used")		{
+			rad[i].setAttribute("checked", "checked"); 
 		}
-	}
-	gid("make").value = item.make[1];
-	gid("model").value = item.model[1];
+	}	gid("makes").value = item.make[1];
+	gid("models").value = item.model[1];
 	gid("year").value = item.year[1];
 	gid("mileage").value = item.mileage[1];
 	gid("condition").value = item.condition[1];
@@ -188,6 +188,17 @@ function editItem(){
 	editSubmit.addEventListener("click", validate);
 	editSubmit.key = this.key	
 	}
+	
+function deleteItem(){
+	var itemDelete = confirm("Are you sure you want to delete this vehicle?");
+	if(itemDelete){localStorage.removeItem(this.key);
+		alert("Vehicle deleted.");
+		window.location.reload();
+	}
+	else{
+		alert("Vehicle not deleted.");
+	}
+}	
 	
 
 //This function clears local storage data
@@ -236,9 +247,9 @@ function validate(eval){
 	
 	if(errorMessage.length >= 1){
 		for(var i=0, j=errorMessage.length; i<j; i++){
-			var createLi = document.createElement("li");
-			createli.innerHTML = errorMessage[i];
-			errMess.appendChild(createLi)
+			var createText = document.createElement("li");
+			createText.innerHTML = errorMessage[i];
+			errMess.appendChild(createText)
 		}
 		eval.preventDefault();
 		return false;
