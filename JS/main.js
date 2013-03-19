@@ -133,13 +133,13 @@ function getData(){
 		createLi.appendChild(createSubLi);
 		var SubText = object[y] [0] +" "+ object[y] [1];
 		createSubLi.innerHTML = SubText;
-		subList.appendChild(liLink);
+		createLi.appendChild(liLink);
 			
 		}	
 			editDelete(localStorage.key(i),liLink);		
 	}
 	
-	
+// Create edit and delete links
 }
 function editDelete(key, liLink){
 	var edit = document.createElement("a");
@@ -149,6 +149,10 @@ function editDelete(key, liLink){
 	edit.addEventListener("click", editItem);
 	edit.innerHTML = tEdit;
 	liLink.appendChild(edit);
+// Break up edit and delete links.
+
+	var breakTag = document.createElement("br")
+	liLink.appendChild(breakTag)
 	
 	var del = document.createElement("a");
 	del.href = "#";
@@ -216,9 +220,9 @@ function validate(eval){
 		getYear = gid("year");
 		
 	errMess.innerHTML = "";
-	getMake.style.border = "1px solid black";
-	getModel.style.border = "1px solid black";
-	getYear.style.border = "1px solid black";
+	getMake.style.border = "3px solid black";
+	getModel.style.border = "3px solid black";
+	getYear.style.border = "3px solid black";
 		
 		
 	var errorMessage = [];

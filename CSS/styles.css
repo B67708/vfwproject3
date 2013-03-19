@@ -1,12 +1,13 @@
 /* John Cardiff-Winchell
 VFW 1303
-Project week 2 */
+Project week 3 */
 
 body{
 	background-color: #fff9c7;
 }
 fieldset{
-	background-color: #00ffff;
+	background-color: #AA9786;
+	
 }
 
 h1{
@@ -14,7 +15,7 @@ h1{
 	border: 1px color solid black;
 	padding: 10px;
 	text-align: center;
-	background-color: #00ffff;
+	background-color: #AA9786;
 	font-family: Copperplate Gothic Light, sans-serif;
 	color: navy;
 	text-decoration: underline;
@@ -35,10 +36,12 @@ div{
 	font-family: monospace;
 	color: maroon;
 	background-color: silver;
+	text-align: left; 
+	
 }
 
 nav{
-	text-align: center;
+	text-align: left;
 
 }
 
@@ -54,3 +57,6 @@ textarea{
 	outline-color: red;
 }
 
+#error{
+	color: red;
+}
